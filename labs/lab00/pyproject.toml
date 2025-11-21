@@ -1,0 +1,40 @@
+[project]
+name = "medical-virtual-assistant"
+version = "0.1.0"
+description = "Medical Virtual Assistant"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "langchain",
+    "langgraph",
+    "fastapi",
+    "uvicorn",
+    "python-dotenv",
+    "guardrails-ai",
+    "pydantic",
+    "pydantic-settings",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "isort",
+    "flake8",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
