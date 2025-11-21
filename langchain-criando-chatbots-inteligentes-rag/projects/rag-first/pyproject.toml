@@ -1,0 +1,85 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-first"
+version = "0.1.0"
+description = "A RAG-based application following Clean Architecture, DDD, and SOLID principles"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["rag", "clean-architecture", "ddd", "solid"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "click>=8.1.7",
+    "python-dotenv>=1.0.0",
+    "sqlalchemy>=2.0.23",
+    "alembic>=1.12.1",
+    "openai>=2.8.1",
+    "pinecone-client>=6.0.0", 
+    "pinecone>=7.3.0", 
+    "dotenv==0.9.9", 
+    "google-generativeai==0.8.5"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.3",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.21.1",
+    "black>=23.11.0",
+    "ruff>=0.1.6",
+    "mypy>=1.7.1",
+    "pre-commit>=3.5.0",
+    "openai>=2.8.1",
+    "pinecone-client>=6.0.0"
+]
+
+[project.scripts]
+rag-first = "presentation.cli.main:cli"
+rag-first-api = "presentation.api.main:start_server"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+include = '\.pyi?$'
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
+ignore = []
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=src --cov-report=term-missing --cov-report=html"
